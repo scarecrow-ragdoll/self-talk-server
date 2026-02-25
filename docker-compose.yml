@@ -85,7 +85,12 @@ services:
     environment:
       - REVERB_HOST=0.0.0.0
       - REVERB_PORT=8080
+      - REVERB_APP_ID=${REVERB_APP_ID}
+      - REVERB_APP_KEY=${REVERB_APP_KEY}
+      - REVERB_APP_SECRET=${REVERB_APP_SECRET}
       - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - CACHE_STORE=redis
 
   queue:
     build:
@@ -103,6 +108,17 @@ services:
       - app
       - db
       - redis
+    environment:
+      - DB_CONNECTION=pgsql
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_DATABASE=${DB_DATABASE:-selftalk}
+      - DB_USERNAME=${DB_USERNAME:-selftalk}
+      - DB_PASSWORD=${DB_PASSWORD:-secret}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - CACHE_STORE=redis
+      - QUEUE_CONNECTION=database
 
 networks:
   selftalk:

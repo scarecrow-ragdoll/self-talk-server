@@ -53,8 +53,7 @@ class User extends Authenticatable
     public function rooms(): BelongsToMany
     {
         return $this->belongsToMany(Room::class, 'room_user')
-            ->withPivot('role', 'joined_at')
-            ->withTimestamps();
+            ->withPivot('role', 'joined_at');
     }
 
     public function messages(): HasMany
